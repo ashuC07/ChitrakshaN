@@ -1,0 +1,425 @@
+/* =============================================
+   CHITRAKSHA — PREMIUM 3D DSLR SCROLL ANIMATION
+   camera-3d.css  — add AFTER style.css
+   ============================================= */
+
+/* ─────────────────────────────────────────────
+   SCROLL STAGE CONTAINER
+───────────────────────────────────────────── */
+#cam3d-stage {
+    position: relative;
+    height: 500vh;
+    background: #040408;
+    z-index: 0;
+}
+
+/* Sticky viewport — pinned while scrolling through stage */
+.cam3d-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #040408;
+}
+
+/* ─────────────────────────────────────────────
+   THREE.JS CANVAS
+───────────────────────────────────────────── */
+#cam3d-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+/* ─────────────────────────────────────────────
+   BACKGROUND: CINEMATIC RADIAL GRADIENT + GRAIN
+───────────────────────────────────────────── */
+.cam3d-bg-gradient {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse 60% 60% at 50% 55%,
+        rgba(232, 255, 71, 0.03) 0%,
+        rgba(0, 212, 255, 0.02) 35%,
+        transparent 70%
+    );
+    animation: bgBreath 8s ease-in-out infinite alternate;
+}
+
+@keyframes bgBreath {
+    0%   { opacity: 0.6; transform: scale(1);    }
+    100% { opacity: 1;   transform: scale(1.08); }
+}
+
+/* Film grain overlay */
+.cam3d-grain {
+    position: absolute;
+    inset: 0;
+    z-index: 12;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px;
+    mix-blend-mode: overlay;
+}
+
+/* ─────────────────────────────────────────────
+   SCROLL PROGRESS INDICATOR (right edge)
+───────────────────────────────────────────── */
+.cam3d-progress-rail {
+    position: absolute;
+    right: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.cam3d-progress-track {
+    width: 1px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.cam3d-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, var(--accent), var(--accent3));
+    height: 0%;
+    transition: height 0.1s linear;
+    box-shadow: 0 0 6px rgba(232, 255, 71, 0.6);
+}
+
+.cam3d-progress-dots {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.cpd {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    transition: background 0.4s, transform 0.4s, box-shadow 0.4s;
+}
+
+.cpd.active {
+    background: var(--accent);
+    transform: scale(1.6);
+    box-shadow: 0 0 8px rgba(232, 255, 71, 0.7);
+}
+
+.cam3d-progress-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.42rem;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.15);
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    margin-top: 6px;
+}
+
+/* ─────────────────────────────────────────────
+   STAGE TEXT OVERLAYS
+───────────────────────────────────────────── */
+.cam3d-texts {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.cam3d-text-block {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+                transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    pointer-events: none;
+    max-width: 420px;
+}
+
+.cam3d-text-block.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cam3d-text-block.exiting {
+    opacity: 0;
+    transform: translateY(-16px);
+    transition-duration: 0.4s;
+}
+
+/* Block positions per stage */
+.cam3d-text-block[data-stage="0"] {
+    left: 50%;
+    top: 12%;
+    transform: translateX(-50%) translateY(20px);
+    text-align: center;
+}
+.cam3d-text-block[data-stage="0"].visible {
+    transform: translateX(-50%) translateY(0);
+}
+.cam3d-text-block[data-stage="0"].exiting {
+    transform: translateX(-50%) translateY(-16px);
+}
+
+.cam3d-text-block[data-stage="1"] { left: 6%;  top: 50%; transform: translateY(calc(-50% + 20px)); }
+.cam3d-text-block[data-stage="1"].visible { transform: translateY(-50%); }
+.cam3d-text-block[data-stage="1"].exiting { transform: translateY(calc(-50% - 16px)); }
+
+.cam3d-text-block[data-stage="2"] { right: 6%; top: 50%; transform: translateY(calc(-50% + 20px)); }
+.cam3d-text-block[data-stage="2"].visible { transform: translateY(-50%); }
+.cam3d-text-block[data-stage="2"].exiting { transform: translateY(calc(-50% - 16px)); }
+
+.cam3d-text-block[data-stage="3"] { left: 6%;  top: 50%; transform: translateY(calc(-50% + 20px)); }
+.cam3d-text-block[data-stage="3"].visible { transform: translateY(-50%); }
+.cam3d-text-block[data-stage="3"].exiting { transform: translateY(calc(-50% - 16px)); }
+
+.cam3d-text-block[data-stage="4"] { right: 6%; top: 50%; transform: translateY(calc(-50% + 20px)); }
+.cam3d-text-block[data-stage="4"].visible { transform: translateY(-50%); }
+.cam3d-text-block[data-stage="4"].exiting { transform: translateY(calc(-50% - 16px)); }
+
+/* Text content styles */
+.stg-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.stg-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+}
+
+.stg-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+}
+
+.stg-sub {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 320px;
+}
+
+.stg-spec {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1.4rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.2rem;
+}
+
+.spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+}
+
+.spec-key   { color: var(--muted); }
+.spec-value { color: var(--text); }
+
+/* ─────────────────────────────────────────────
+   CALLOUT ANNOTATION LABELS
+───────────────────────────────────────────── */
+.cam3d-callout {
+    position: absolute;
+    pointer-events: none;
+    z-index: 15;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.cam3d-callout.visible { opacity: 1; }
+
+.callout-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    box-shadow: 0 0 6px rgba(232, 255, 71, 0.8);
+    animation: calloutPulse 2s ease-in-out infinite;
+}
+
+@keyframes calloutPulse {
+    0%,100% { transform: scale(1);   box-shadow: 0 0 6px rgba(232,255,71,0.8); }
+    50%      { transform: scale(1.5); box-shadow: 0 0 12px rgba(232,255,71,0.4); }
+}
+
+.callout-line {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(232,255,71,0.8), rgba(232,255,71,0.3));
+    flex-shrink: 0;
+}
+
+.callout-line.left {
+    background: linear-gradient(90deg, rgba(232,255,71,0.3), rgba(232,255,71,0.8));
+}
+
+.callout-body {
+    padding: 0.4rem 0.7rem;
+    border: 1px solid rgba(232, 255, 71, 0.2);
+    background: rgba(4, 4, 8, 0.8);
+    backdrop-filter: blur(8px);
+}
+
+.callout-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    white-space: nowrap;
+}
+
+.callout-sub {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.5);
+    display: block;
+    white-space: nowrap;
+    margin-top: 1px;
+}
+
+/* Left-pointing callout (flips layout) */
+.cam3d-callout.left {
+    flex-direction: row-reverse;
+}
+
+/* ─────────────────────────────────────────────
+   INITIAL SCROLL HINT
+───────────────────────────────────────────── */
+.cam3d-scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
+
+.cam3d-scroll-hint.hidden { opacity: 0; }
+
+.cam3d-scroll-hint span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.scroll-hint-wheel {
+    width: 20px;
+    height: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    position: relative;
+}
+
+.scroll-hint-wheel::after {
+    content: '';
+    width: 2px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 1px;
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: wheelScroll 1.6s ease-in-out infinite;
+}
+
+@keyframes wheelScroll {
+    0%   { top: 4px;  opacity: 1; }
+    80%  { top: 16px; opacity: 0; }
+    100% { top: 4px;  opacity: 0; }
+}
+
+/* ─────────────────────────────────────────────
+   SECTION LABEL (bottom left)
+───────────────────────────────────────────── */
+.cam3d-section-label {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 3rem;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.cam3d-section-label span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.15);
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .cam3d-text-block[data-stage="1"],
+    .cam3d-text-block[data-stage="3"] { left: 4%; }
+    .cam3d-text-block[data-stage="2"],
+    .cam3d-text-block[data-stage="4"] { right: 4%; }
+    .stg-title { font-size: clamp(2rem, 8vw, 3rem); }
+    .cam3d-callout { display: none; }
+    .cam3d-progress-rail { right: 1rem; }
+    .stg-spec { display: none; }
+}
+
+@media (max-width: 480px) {
+    .cam3d-text-block { max-width: 280px; }
+    .cam3d-text-block[data-stage="2"],
+    .cam3d-text-block[data-stage="4"] { right: 2%; }
+    #cam3d-stage { height: 450vh; }
+}

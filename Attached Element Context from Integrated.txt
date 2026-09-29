@@ -1,0 +1,87 @@
+Attached Element Context from Integrated Browser
+
+Element: a.btn-ghost.reveal.reveal-delay-2.visible
+
+URL: http://localhost:8000/index.html?autoScrollCheck=20260929
+
+HTML Path: div.gallery-header > a.btn-ghost.reveal.reveal-delay-2.visible
+
+Outer HTML:
+```html
+<a href="#" class="btn-ghost reveal reveal-delay-2 visible" style="align-self:flex-end;">View All →</a>
+```
+
+Dimensions:
+- top: 182px
+- left: 718px
+- width: 169px
+- height: 52px
+
+CSS:
+```css
+element { align-self:flex-end; }
+*, *::before, *::after { margin: 0;
+    padding: 0;
+    box-sizing: border-box; }
+.btn-ghost { padding: 1rem 2.4rem;
+    background: transparent;
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    cursor: none;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block; }
+.reveal { opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+        transform 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.btn-ghost:hover { border-color: var(--accent);
+    color: var(--accent); }
+.reveal.visible { opacity: 1;
+    transform: translateY(0); }
+
+/* Inherited */
+body { color: var(--text); font-family: 'Syne', sans-serif; cursor: none }
+
+/* Resolved values */
+margin: 0px;
+padding: 16px 38.4px;
+text-decoration: rgb(232, 255, 71);
+align-self: flex-end;
+background-attachment: scroll;
+background-clip: border-box;
+background-color: rgba(0, 0, 0, 0);
+background-image: none;
+background-origin: padding-box;
+background-position-x: 0%;
+background-position-y: 0%;
+background-repeat: repeat;
+background-size: auto;
+box-sizing: border-box;
+color: rgb(232, 255, 71);
+cursor: none;
+display: block;
+font-family: "Space Mono", monospace;
+font-size: 12.48px;
+height: 52px;
+letter-spacing: 1.4976px;
+opacity: 1;
+text-transform: uppercase;
+transform: matrix(1, 0, 0, 1, 0, 0);
+transition-behavior: normal, normal;
+transition-delay: 0.2s;
+transition-duration: 0.8s, 0.8s;
+transition-property: opacity, transform;
+transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1), cubic-bezier(0.23, 1, 0.32, 1);
+width: 168.988px;
+
+/* CSS variables */
+--border: rgba(255, 255, 255, 0.06);
+--text: #f0eee6;
+--accent: #e8ff47;
+```

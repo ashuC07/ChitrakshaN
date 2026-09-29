@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chitraksha — College Media Club</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ── PRELOADER ── -->
+    <div id="preloader">
+        <div class="preloader-inner">
+            <div class="logo-container">
+                <img src="logo.png" alt="Chitraksha Logo" class="preloader-logo glitch-logo">
+                <img src="logo.png" alt="Chitraksha Logo" class="preloader-logo glitch-copy glitch-copy-1">
+                <img src="logo.png" alt="Chitraksha Logo" class="preloader-logo glitch-copy glitch-copy-2">
+            </div>
+            <div class="loader-circ">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" class="loader-circle loader-circle-bg"></circle>
+                    <circle cx="50" cy="50" r="45" id="loader-circle-fg" class="loader-circle loader-circle-fg">
+                    </circle>
+                </svg>
+            </div>
+            <div class="loading-text">
+                <span class="glitch-text" data-text="SYSTEM_INIT.EXE">SYSTEM_INIT.EXE</span>
+                <div class="loading-progress"><span id="progress-text">0</span>%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── SCROLL PROGRESS BAR ── -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- ── CUSTOM CURSOR ── -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- ════════════════════════════════════════
+       NAVIGATION
+  ════════════════════════════════════════ -->
+    <nav>
+        <div class="nav-brand">
+            <img src="logo.png" width="60px" height="60px" alt="logo">
+            <a href="#" class="nav-logo glitch">Chitraksha</a>
+        </div>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#stories">Stories</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════ -->
+    <section id="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-glow2"></div>
+
+        <!-- Parallax floating text -->
+        <div class="parallax-float" id="pf1" style="top:10%; right:-5%;">चित्रक्ष</div>
+        <div class="parallax-float" id="pf2" style="bottom:5%; left:-2%; font-size:10rem;">LENS</div>
+
+        <div class="hero-eyebrow">College Media Club · Est. 2020</div>
+
+        <h1 class="hero-title">
+            <span class="line1">WE <span class="accent-word glitch-hero" data-text="FRAME">FRAME</span></span>
+            <span class="line2 glitch-hero" data-text="YOUR STORY">YOUR STORY</span>
+        </h1>
+
+        <p class="hero-sub">
+            Chitraksha captures the pulse of college life — one reel, one frame, one story at a time.
+            Visual storytellers, born on campus.
+        </p>
+
+        <div class="hero-ctas">
+            <a href="#gallery" class="btn-primary">Explore Gallery</a>
+            <a href="#stories" class="btn-ghost">Watch Reels ↗</a>
+        </div>
+
+        <div class="hero-scroll-hint">
+            <div class="scroll-line"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+       MARQUEE TICKER
+  ════════════════════════════════════════ -->
+    <div class="marquee-wrap">
+        <div class="marquee-track" id="marqueeTrack"></div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+       ABOUT
+  ════════════════════════════════════════ -->
+    <section id="about">
+        <div class="about-grid">
+
+            <!-- Visual block -->
+            <div class="about-visual reveal">
+                <div class="about-frame">
+                    <img src="college1.jpeg" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="about-frame-inner">CHITRAKSHA</div>
+                </div>
+                <div class="about-corner"></div>
+                <div class="about-accent-box">2020<br>EST.</div>
+            </div>
+
+            <!-- Text block -->
+            <div>
+                <div class="section-label reveal">Our Mission</div>
+                <h2 class="section-title reveal reveal-delay-1">
+                    EVERY MOMENT<br>DESERVES A<br>FRAME.
+                </h2>
+                <p style="color:var(--muted); line-height:1.9; margin-top:1.8rem;" class="reveal reveal-delay-2">
+                    Chitraksha is the official media club of our college — a collective of passionate visual
+                    storytellers who document campus life through the lens of creativity. From candid shots in
+                    the corridors to cinematic reels of cultural fests, we turn ordinary moments into lasting
+                    memories.
+                </p>
+
+                <!-- Stats -->
+                <div class="about-stats reveal reveal-delay-3">
+                    <div class="stat-box">
+                        <div class="stat-num">200+</div>
+                        <div class="stat-label">Reels Created</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">50K+</div>
+                        <div class="stat-label">Total Reach</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">30+</div>
+                        <div class="stat-label">Events Covered</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">18</div>
+                        <div class="stat-label">Active Members</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+       GALLERY
+  ════════════════════════════════════════ -->
+    <section id="gallery">
+        <div class="gallery-header">
+            <div>
+                <div class="section-label reveal">Visual Archive</div>
+                <h2 class="section-title reveal reveal-delay-1">THE<br>GALLERY</h2>
+            </div>
+            <a href="gallery.html" id="viewAllPhotos" class="btn-ghost reveal reveal-delay-2" style="align-self:flex-end;">View All →</a>
+        </div>
+
+        <div class="gallery-rail" id="galleryRail" aria-label="Featured gallery images" hidden>
+            <div class="gallery-rail-track" id="galleryRailTrack"></div>
+        </div>
+
+        <!-- Grid populated by script.js -->
+        <div class="gallery-grid" id="galleryGrid"></div>
+
+
+    </section>
+
+    <!-- ════════════════════════════════════════
+       STORIES / REELS
+  ════════════════════════════════════════ -->
+    <section id="stories">
+        <div class="stories-intro">
+            <div class="section-label reveal">Reels &amp; Shorts</div>
+            <h2 class="section-title reveal reveal-delay-1">STORIES<br>WE TELL</h2>
+            <p class="reveal reveal-delay-2">
+                Short-form storytelling is our superpower. From 30-second campus snippets to full cultural
+                fest documentaries — we make it cinematic.
+            </p>
+
+        </div>
+
+        <!-- Cards populated by script.js -->
+        <div class="stories-grid" id="storiesGrid"></div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+       TEAM
+  ════════════════════════════════════════ -->
+    <section id="team">
+        <div class="section-label reveal">The Crew</div>
+        <h2 class="section-title reveal reveal-delay-1">MEET THE<br>STORYTELLERS</h2>
+
+        <!-- Cards populated by script.js -->
+        <div class="team-grid" id="teamGrid"></div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+       CONTACT
+  ════════════════════════════════════════ -->
+    <section id="contact">
+        <div class="contact-glow"></div>
+        <div class="contact-inner">
+
+            <div class="section-label reveal" style="justify-content:center;">Get In Touch</div>
+
+            <div class="contact-big reveal reveal-delay-1">
+                <span>LET'S</span><br>
+                <span class="outline">CREATE</span><br>
+                <span>TOGETHER</span>
+            </div>
+
+            <p class="reveal reveal-delay-2" style="color:var(--muted); line-height:1.8;">
+                Want us to cover your event? Collaborate on a project? Or just want to join the team?
+                Slide into our DMs or drop us a message below.
+            </p>
+
+            <div style="margin-top:2.5rem;" class="reveal reveal-delay-3">
+                <a href="mailto:chitraksha@college.edu" class="btn-primary">Send a Message</a>
+            </div>
+
+            <div class="contact-socials reveal reveal-delay-4">
+                <a href="#" class="social-link" title="Instagram">&#9679;</a>
+                <a href="#" class="social-link" title="YouTube">&#9654;</a>
+                <a href="#" class="social-link" title="LinkedIn">in</a>
+                <a href="#" class="social-link" title="Twitter">&#10005;</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════ -->
+    <footer>
+        <div class="footer-brand">
+            <img src="logo.png" width="100px" height="100px" alt="logo">
+            <span class="footer-logo">Chitraksha</span>
+        </div>
+        <p>©2020-2026 Chitraksha Media Club · All Rights Reserved</p>
+        <p style="font-size:1rem;">Built with ❤ by <b><i>Ashutosh Chandgude</i></b></p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+   <!-- After style.css -->
+<link rel="stylesheet" href="camera-3d.css">
+
+<!-- After script.js at bottom of <body> -->
+<script src="camera-3d.js"></script> 
+
+</body>
+
+</html>
